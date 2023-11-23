@@ -1,5 +1,6 @@
 using namespace std;
 #include <iostream>
+#include "EntregaGrafo.h"
 
 Grafo::Grafo(){
     N=0;
