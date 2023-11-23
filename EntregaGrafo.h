@@ -1,3 +1,9 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+using namespace std;
+
+
 static const int MAX = 20;
 class Grafo {
  int N;
@@ -9,7 +15,7 @@ class Grafo {
 
 public:
  Grafo();
- void insertarVertice(string cad1)
+ void insertarVertice(string cad1);
  void insertarArista(string cad1, string cad2, float coste); // hay coste, por lo tanto, el grafo es ponderado
  void MostrarMatrizAdy(int matriz [MAX][MAX]);// creo que no hace falta pasar matriz por parametro
  void Camino(int i, int j, int MatP);
