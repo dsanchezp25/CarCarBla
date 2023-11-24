@@ -11,7 +11,7 @@ using namespace std;
 const int MAX_CITIES = 20;
 const int MAX_CITY_NAME = 15;
 
-int mian(){
+int main(){
 // Lectura del número de ciudades
 int n;
 cin >> n;
