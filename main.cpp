@@ -26,6 +26,8 @@ if (n < 2 || n > MAX_CITIES) {
 vector<string> cities(n);
 for (int i = 0; i < n; ++i) {
     cin >> cities[i];
+    insertarVertice(cities[i]);
+    insertarArista(cities[i], cities[i+1], distance);
 }
 
 // Lectura del número de arcos
@@ -39,6 +41,11 @@ for (int i = 0; i < m; ++i) {
 
     cin >> city1 >> city2 >> distance;
 }
+
+// Mostrar la matriz de adyacencia y la matriz de Floyd)
+mostrarMatrizAdy(MatAdyacencia[MAX][MAX]);
+Floyd();
+Camino(i, j, MatP[MAX][MAX]);
 
 return 0;
 }
