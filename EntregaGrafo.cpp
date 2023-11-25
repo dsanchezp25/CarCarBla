@@ -40,7 +40,7 @@ void Gafo::insertarArista(string cad1, string cad2, float coste){
         cout << "Una o las dos ciudades no se encuentran en el grafo" << endl;
 }
 
-void Grafo::mostrarMatrizAdy(int matriz[MAX][MAX]){// creo que no hace falta pasar matriz por parametro
+void Grafo::mostrarMatrizAdy(int matriz[MAX][MAX]){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
             cout << matriz[i][j] << endl;
@@ -69,6 +69,7 @@ void Grafo::Floyd(){
 }
 
 void Camino(int i, int j, Matriz P){
+    //Se muestra la matriz de Floyd
     int k;
 
     k = P[i][j];
