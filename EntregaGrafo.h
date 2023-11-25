@@ -17,7 +17,7 @@ public:
  Grafo();
  void insertarVertice(string cad1);
  void insertarArista(string cad1, string cad2, float coste); // hay coste, por lo tanto, el grafo es ponderado
- void MostrarMatrizAdy(int matriz [MAX][MAX]);// creo que no hace falta pasar matriz por parametro
+ void MostrarMatrizAdy(int matriz [MAX][MAX]);
  void Camino(int i, int j, int MatP);
  int buscarPosicion (string cad1);
  void Floyd();
