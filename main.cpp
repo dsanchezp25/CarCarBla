@@ -1,10 +1,11 @@
 /*
- * CarCarBla proyect by Daniel Sanchez Parra & Gonzalo Megias
+ * CarCarBla proyect by Daniel Sanchez Parra & Gonzalo Megias Hernandez
  * Created by dsanchezp25 on 23/11/23.
 */
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "EntregaGrafo.h"
 using namespace std;
 
@@ -14,14 +15,16 @@ const int MAX_CITY_NAME = 15;
 //aqui se ejecutan los metodos del grafo
 void ejecucionGrafo(Grafo& g){
 
-    // g.Camino(i, j, MatP[MAX][MAX]);
+   // g.Camino(i, j, MatP[MAX][MAX]);
     g.Floyd();
 
     // Mostrar la matriz de adyacencia y la matriz de Floyd)
     g.MostrarMatrizAdy();
+    cout << " " <<endl;
 //    g.mostrarMatrizP();
     g.mostrarMatrizFloid();
 }
+
 
 int main(){
     Grafo G = *new Grafo(); //creamos el grafo G
