@@ -14,14 +14,13 @@ const int MAX_CITY_NAME = 15;
 
 //aqui se ejecutan los metodos del grafo
 void ejecucionGrafo(Grafo& g){
-
-   // g.Camino(i, j, MatP[MAX][MAX]);
+   // Generamos la matriz de Floyd
     g.Floyd();
 
-    // Mostrar la matriz de adyacencia y la matriz de Floyd)
+    // Mostrar la matriz de adyacencia 
     g.MostrarMatrizAdy();
     cout << " " <<endl;
-//    g.mostrarMatrizP();
+   // Mostrar la matriz de Floyd  
     g.mostrarMatrizFloid();
 }
 
