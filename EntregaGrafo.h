@@ -1,3 +1,4 @@
+
 #ifndef ENTREGAGRAFO_H_
 #define ENTREGAGRAFO_H_
 
@@ -47,7 +48,9 @@ public:
     //muestra la matriz de Floyd
     void mostrarMatrizFloid();
 
+    void mostrarMatrizP();
     //Añadir los métodos que consideres necesarios
-}; 
+};
 
 #endif /* ENTREGAGRAFO_H_*/
+
