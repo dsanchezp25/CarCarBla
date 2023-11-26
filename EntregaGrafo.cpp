@@ -62,9 +62,9 @@ void Grafo::Floyd(){
 		}
 
 	//Despues se aplica el algoritmo de Floyd
-	for(int k = 0; k == N; k++){
-		for(int i = 0; i == N; i++){
-			for(int j = 0; j == N; j++){
+	for(int k = 0; k != N; k++){
+		for(int i = 0; i != N; i++){
+			for(int j = 0; j != N; j++){
 				if(MatFloyd[i][k] + MatFloyd[k][j] < MatFloyd[i][j]){
 					MatFloyd[i][j] = MatFloyd[i][k] + MatFloyd[k][j];
 					MatP[i][j] = k;//k = vertice intermedio
