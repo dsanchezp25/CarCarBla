@@ -2,7 +2,6 @@
  * CarCarBla proyect by Daniel Sanchez Parra & Gonzalo Megias
  * Created by dsanchezp25 on 23/11/23.
 */
-#include <stdio.h>
 #include <iostream>
 #include <vector>
 #include <string>

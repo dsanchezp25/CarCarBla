@@ -1,3 +1,6 @@
+#ifndef ENTREGAGRAFO_H_
+#define ENTREGAGRAFO_H_
+
 #include <iostream>
 #include <string>
 #include <stdio.h>
@@ -14,7 +17,9 @@ class Grafo {
     //Añadir los atributos y métodos que consideres necesarios
 
 public:
+    //constructor de grafo
     Grafo();
+
     //inserta la ciudad en el conjunto de vertices
     void insertarVertice(string cad1);
 
@@ -44,3 +49,5 @@ public:
 
     //Añadir los métodos que consideres necesarios
 }; 
+
+#endif /* ENTREGAGRAFO_H_*/
