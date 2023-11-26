@@ -20,6 +20,7 @@ void ejecucionGrafo(Grafo g){
 
     // Mostrar la matriz de adyacencia y la matriz de Floyd)
     g.MostrarMatrizAdy();
+//    g.mostrarMatrizP();
     g.mostrarMatrizFloid();
 }
 
@@ -63,15 +64,15 @@ int main(){
 
     // Lectura de los arcos y distancias (no se almacenan en este ejemplo)
     for (int i = 0; i < d; ++i) {
-        string line;
+        /*string line;
         getline(cin, line); //leemos la linea entera, city1 city2 distance
 
-        istringstream iss(line);
+        istringstream iss(line);*/
         string city1, city2;
         float distance;
 
         //extrameos los datos de la linea
-        iss >> city1 >> city2 >> distance;
+        cin >> city1 >> city2 >> distance;
 
         //insertamos los datos de distancias entre ciudades
         G.insertarArista(city1, city2, distance);
