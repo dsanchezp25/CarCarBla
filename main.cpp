@@ -27,6 +27,7 @@ void ejecucionGrafo(Grafo& g){
 
 int main(){
     Grafo G = *new Grafo(); //creamos el grafo G
+    Grafo Prioridad = *new Grafo(); //creamos el grafo de prioridades
     // Lectura del número de ciudades
     int n;
     cin >> n;
@@ -64,10 +65,6 @@ int main(){
 
     // Lectura de los arcos y distancias (no se almacenan en este ejemplo)
     for (int i = 0; i < d; ++i) {
-        /*string line;
-        getline(cin, line); //leemos la linea entera, city1 city2 distance
-
-        istringstream iss(line);*/
         string city1, city2;
         float distance;
 
@@ -76,6 +73,25 @@ int main(){
 
         //insertamos los datos de distancias entre ciudades
         G.insertarArista(city1, city2, distance);
+    
+    }
+
+    //Lectura de caminos minimos
+    int p;
+    cin >> p;
+
+    if(p < 1 || p > (n*n)){
+        cerr << "El número de caminos minimos debe estar entre 1 y " << n*n << "." <<endl;
+        return 1; // Código de error
+    }
+
+    for(int i = 0; i < p; i++){
+        string city3, city4;
+
+        cin >> city3 >> city4;
+
+        //prioridades
+        cout << "Prioridades: " << endl;
     }
 
     //ejecutamos los metodos de los grafos
