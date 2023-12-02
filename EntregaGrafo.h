@@ -5,21 +5,40 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <vector>
 using namespace std;
 
 static const int MAX = 20;
-
+struct ruta{
+	string origen;
+	string destino;
+	int numCiudades;
+	//camino almacenara la ruta a seguir para obtener el camino
+	vector<string>camino[MAX];
+	float kilometros;
+//
+//	ruta(int caminos): camino(caminos){}
+};
 class Grafo {
     int N;
     string Cjtovertices[MAX];
     float MatAdyacencia[MAX][MAX]; //fila(i) = origen, columna(j) = destino
     float MatFloyd [MAX][MAX];
     int MatP [MAX][MAX];
+    int matPrioridad[MAX][MAX];
+    int prioridades;
+    vector<ruta>rutasGrafo;
     //Añadir los atributos y métodos que consideres necesarios
 
 public:
     //constructor de grafo
     Grafo();
+    void setTamanoVectorRuta(int caminos);
+
+    //inicializa el numero de prioridades del grafo
+    void setPrioridades(int prio);
+    //devuelveel numero de prioridades del grafo
+    int getPrioridades();
 
     //inserta la ciudad en el conjunto de vertices
     void insertarVertice(string cad1);
@@ -49,6 +68,18 @@ public:
     void mostrarMatrizFloid();
 
     void mostrarMatrizP();
+
+    //crea la matriz de prioridades
+    void matrizPrioridad(string cad1, string cad2, int prioridad);
+
+    //camino minimo entre ciudades
+    void caminosMinimos();
+
+    //cantidad minima de carreteras que deben arreglarse por prioridad
+    float kilometrosArreglados();
+
+    //camino minimo entre ciudades con carreteras arregladas
+    void caminosArreglados();
     //Añadir los métodos que consideres necesarios
 };
 
