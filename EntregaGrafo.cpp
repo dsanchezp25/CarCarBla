@@ -78,29 +78,42 @@ void Grafo::Floyd(){
     }
 }
 
-void Grafo::mostrarMatrizFloid() {
+void Grafo::floydCaminosMini(){
+    //se inicializa MatFloyd con los valores de MatAdyacencia
     for(int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
-            if (i!= j)
-                Camino(i,j,MatP);
+            MatFloyd[i][j] = matCaminosMin[i][j];
+
+    //Despues se aplica el algoritmo de Floyd
+    for(int k = 1; k <= N; k++){
+        for(int i = 1; i <= N; i++){
+            for(int j = 1; j <= N; j++){
+                if(MatFloyd[i][k] + MatFloyd[k][j] < MatFloyd[i][j]){
+                    MatFloyd[i][j] = MatFloyd[i][k] + MatFloyd[k][j];
+                    MatP[i][j] = k;//k = vertice intermedio
+                }
+            }
+        }
+    }
 }
 
 void Grafo::mostrarMatrizP() {
     for(int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
             cout << MatP[i][j] << " ";
-        cout << endl;
+    cout << endl;
 
 }
 
-void Grafo::Camino(int i, int j, int MatrizP[MAX][MAX]){
+void Grafo::Camino(int i, int j, ruta ruta){
     //Se muestra la matriz de Floyd
     int k;
-    k = MatrizP[i][j];
+    k = MatP[i][j];
     if(k != -1){
-        Camino(i, k, MatrizP);
+        Camino(i, k, ruta);
         cout <<Cjtovertices[k] << endl;
-        Camino(k, j, MatrizP);
+        ruta.kilometros += matCaminosMin[i][k];
+        Camino(k, j,ruta);
     }
 }
 
@@ -115,12 +128,14 @@ void Grafo::matrizPrioridad(string cad1, string cad2, int prioridad){
 }
 
 void Grafo::caminosMinimos(){
-	for (int i = 0; i < getPrioridades(); ++i){
-		for(int j = 0; j < rutasGrafo[i].numCiudades; j++)
-			cout << rutasGrafo[i].camino[j].back() << " ";
 
-		cout << rutasGrafo[i].kilometros << endl;
-	}
+	for (int i = 0; i < getPrioridades(); ++i){
+			int inicio = buscarPosicion(rutasGrafo[i].origen);
+			int fin = buscarPosicion(rutasGrafo[i].destino);
+			Camino(inicio, fin, rutasGrafo[i]);
+
+			cout << rutasGrafo[i].kilometros << endl;
+		}
 }
 
 void Grafo::setTamanoVectorRuta(int caminos) {
@@ -133,5 +148,72 @@ float Grafo::kilometrosArreglados() {
 }
 
 void Grafo::caminosArreglados() {
+
+}
+
+void Grafo::algoritmoKruskal() {
+	int visitados[MAX];
+	float nuevoRecorrido[MAX][MAX];
+
+	for (int i = 0; i < MAX; i++) {
+		for (int j = 0; j < MAX; j++) {
+			if (j == i)
+				nuevoRecorrido[i][j] = -1;
+			else
+				nuevoRecorrido[i][j] = 9999;
+		}
+	}
+
+	for (int i = 1; i < MAX; i++)
+		visitados[i] = i;
+
+	int vertices = 1, org, dst;
+
+	while (vertices < N) {
+		float minimo;
+
+		minimo = arcoMinimo(org,dst,visitados);
+
+		if (visitados[org] != visitados[dst]) {
+
+			nuevoRecorrido[org][dst] = minimo;
+			nuevoRecorrido[dst][org] = minimo;
+
+			int aux = visitados[dst];
+			visitados[dst] = visitados[org];
+			for (int i = 0; i < N; i++)
+				if (visitados[i] == aux)
+					visitados[i] = visitados[org];
+
+			vertices++;
+		}
+	}
+
+	copiarMatriz(nuevoRecorrido);
+}
+
+
+
+float Grafo::arcoMinimo (int &org, int &dst, int visitados[MAX]) {
+    float min = 9999;
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            if (min > MatAdyacencia[i][j] && MatAdyacencia[i][j] != 0 && visitados[i] != visitados[j]) {
+                min = MatAdyacencia[i][j];
+                org = i;
+                dst = j;
+            }
+    return min;
+}
+
+void Grafo::copiarMatriz (float m[MAX][MAX]) {
+    for (int i = 0; i < MAX; i++)
+        for (int j = 0; j < MAX; j++)
+            matCaminosMin[i][j] = m[i][j];
+}
+
+void Grafo::obtenerCaminoMinimos() {
+
+
 
 }
