@@ -3,7 +3,8 @@
 
 Grafo::Grafo(){
     N = 0;
-    prioridades = 0;
+    preguntas = 0;
+    cantidadPrioridades = 0;
     for (int i=0; i<MAX; i++){
         for (int j=0; j<MAX; j++){
             MatAdyacencia[i][j]=0;
@@ -14,12 +15,16 @@ Grafo::Grafo(){
     }
 }
 
-void Grafo::setPrioridades(int prio) {
-	this->prioridades = prio;
+void Grafo::setRutaGrafo(ruta rutaNueva, int i) {
+	this->rutasGrafo[i] = rutaNueva;
 }
 
-int Grafo::getPrioridades() {
-	return this->prioridades;
+void Grafo::setPreguntas(int prio) {
+	this->preguntas = prio;
+}
+
+int Grafo::getPreguntas() {
+	return this->preguntas;
 }
 void Grafo::insertarVertice(string cad1){
     if(N == MAX){
@@ -117,6 +122,18 @@ void Grafo::Camino(int i, int j, ruta ruta){
     }
 }
 
+bool Grafo::hayCamino(int i, int j) {
+	bool enc = false;
+	int k = matCaminosMin[i][j];
+
+	if(k != -1){
+		enc = hayCamino(i, k);
+		enc = hayCamino(k, j);
+	}
+
+	return enc;
+}
+
 void Grafo::matrizPrioridad(string cad1, string cad2, int prioridad){
 	//se buscan las ciuades en el conjunto de vertices y se obtienen los indices
 	int pos1 = buscarPosicion(cad1);
@@ -128,8 +145,8 @@ void Grafo::matrizPrioridad(string cad1, string cad2, int prioridad){
 }
 
 void Grafo::caminosMinimos(){
-
-	for (int i = 0; i < getPrioridades(); ++i){
+	floydCaminosMini();
+	for (int i = 0; i < getPreguntas(); ++i){
 			int inicio = buscarPosicion(rutasGrafo[i].origen);
 			int fin = buscarPosicion(rutasGrafo[i].destino);
 			Camino(inicio, fin, rutasGrafo[i]);
@@ -138,13 +155,27 @@ void Grafo::caminosMinimos(){
 		}
 }
 
-void Grafo::setTamanoVectorRuta(int caminos) {
-
-}
 
 float Grafo::kilometrosArreglados() {
-
-	return 0;
+	float kilometros = 0;
+	int prioridad = 1;
+	while(prioridad <= cantidadPrioridades){
+		for(int i =0; i < N && prioridad <= cantidadPrioridades; i++){
+			for(int j = 0 ; j < N && prioridad <= cantidadPrioridades; j++){
+				if(matPrioridad[i][j] != 0){
+					if(matPrioridad[i][j] == prioridad){
+						if(!hayCamino(i,j)){
+							prioridad++;
+							kilometros += matCaminosMin[i][j];
+						}else{
+							return kilometros;
+						}
+					}
+				}
+			}
+		}
+	}
+	return kilometros;
 }
 
 void Grafo::caminosArreglados() {
@@ -212,8 +243,13 @@ void Grafo::copiarMatriz (float m[MAX][MAX]) {
             matCaminosMin[i][j] = m[i][j];
 }
 
-void Grafo::obtenerCaminoMinimos() {
 
-
-
+void Grafo::setCantidadPrioridades(int maxPrio) {
+	cantidadPrioridades = maxPrio;
 }
+
+int Grafo::getCantidadPrioridades() {
+	return cantidadPrioridades;
+}
+
+
