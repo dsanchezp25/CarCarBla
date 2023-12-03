@@ -25,8 +25,9 @@ class Grafo {
     int MatP [MAX][MAX];
     int matPrioridad[MAX][MAX];
     float matCaminosMin[MAX][MAX];
-    int prioridades;
+    int preguntas;
     vector<ruta>rutasGrafo;
+    int cantidadPrioridades;
     //Añadir los atributos y métodos que consideres necesarios
 
 public:
@@ -37,16 +38,20 @@ public:
     //constructor de grafo
     Grafo();
 
+    void setCantidadPrioridades(int maxPrio);
 
+    int getCantidadPrioridades();
+
+    void setRutaGrafo(ruta rutaNueva, int i);
     /*PRE: 0 < prio <= MAX
      *POST: inicializa el numero de prioridades del grafo
     */
-    void setPrioridades(int prio);
+    void setPreguntas(int prio);
 
     /*PRE:
-     *POST: devuelve el numero de prioridades del grafo
+     *POST: devuelve el numero de preguntas del grafo
     */
-    int getPrioridades();
+    int getPreguntas();
 
     /*PRE:
      *POST: inserta la ciudad en el conjunto de vertices
@@ -73,6 +78,8 @@ public:
      *POST: muestra la matriz de Floyd (camino de menor coste)
     */
     void Camino(int i, int j, ruta ruta);
+
+    bool hayCamino(int i, int j);
 
     /*PRE:Matriz de adyacencia creada e inicializada
      *POST: muestra la matriz de adyacencia
