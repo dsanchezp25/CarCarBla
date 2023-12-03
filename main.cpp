@@ -13,20 +13,20 @@ const int MAX_CITY_NAME = 15;
 
 //aqui se ejecutan los metodos del grafo
 void ejecucionGrafo(Grafo& g){
-//	caminos minimos entre las ciudades
+
 	g.algoritmoKruskal();
+
+	//	caminos minimos entre las ciudades
 	g.caminosMinimos();
 
-
-//	kilometros de carretas que deben arreglarse
-//	kruskal / djasktra
+	//	kilometros de carretas que deben arreglarse
 	g.kilometrosArreglados();
 
-/*
- * camino minimo entre cada par de ciudades de las
- * p cuestiones.
- * Solo considera carreteras arregladas
- */
+	/*
+	 * camino minimo entre cada par de ciudades de las
+	 * p cuestiones.
+	 * Solo considera carreteras arregladas
+	 */
 	g.caminosArreglados();
 }
 
@@ -84,7 +84,7 @@ int main(){
         G.insertarArista(city1, city2, distance);
     }
 
-    //Lectura de caminos minimos
+    //Lectura de preguntas de caminos minimos
 	int p;
 	cin >> p;
 
@@ -93,13 +93,14 @@ int main(){
 		return 1; // Código de error
 	}
 
-	G.setPrioridades(p);
-    vector<ruta>rutas;
+	G.setPreguntas(p);
+    vector<ruta>rutas(p);
 	for(int i = 0; i < p; i++){
 		string origen, destino;
 		cin >> origen >> destino;
 		rutas[i].origen = origen;
 		rutas[i].destino= destino;
+		G.setRutaGrafo(rutas[i] ,i);
 	}
 
 
@@ -109,16 +110,19 @@ int main(){
 
 	//Lectura de la prioridad que da la Junta
 	for (int i = 0; i < d; ++i) {
-	        string city1, city2;
-	        int prioridad;
+		string city1, city2;
+		int prioridad;
 
-	        //extrameos los datos de la linea
-	        cin >> city1 >> city2 >> prioridad;
+		//extrameos los datos de la linea
+		cin >> city1 >> city2 >> prioridad;
 
-	        //insertamos los datos de prioridad de la carreta entre las ciudades
+		//insertamos los datos de prioridad de la carreta entre las ciudades
 
-	        G.matrizPrioridad(city1, city2, prioridad);
-	    }
+		G.matrizPrioridad(city1, city2, prioridad);
+
+		if(prioridad > G.getCantidadPrioridades())
+			G.setCantidadPrioridades(prioridad);
+	 }
 
     //ejecutamos los metodos de los grafos
     ejecucionGrafo(G);
