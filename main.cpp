@@ -14,7 +14,9 @@ const int MAX_CITY_NAME = 15;
 //aqui se ejecutan los metodos del grafo
 void ejecucionGrafo(Grafo& g){
 //	caminos minimos entre las ciudades
+	g.algoritmoKruskal();
 	g.caminosMinimos();
+
 
 //	kilometros de carretas que deben arreglarse
 //	kruskal / djasktra
