@@ -16,8 +16,6 @@ struct ruta{
 	//camino almacenara la ruta a seguir para obtener el camino
 	vector<string>camino[MAX];
 	float kilometros;
-//
-//	ruta(int caminos): camino(caminos){}
 };
 class Grafo {
     int N;
@@ -26,6 +24,7 @@ class Grafo {
     float MatFloyd [MAX][MAX];
     int MatP [MAX][MAX];
     int matPrioridad[MAX][MAX];
+    float matCaminosMin[MAX][MAX];
     int prioridades;
     vector<ruta>rutasGrafo;
     //Añadir los atributos y métodos que consideres necesarios
@@ -37,6 +36,7 @@ public:
     */
     //constructor de grafo
     Grafo();
+
 
     /*PRE: 0 < prio <= MAX
      *POST: inicializa el numero de prioridades del grafo
@@ -68,10 +68,11 @@ public:
     */
     void Floyd();
 
+    void floydCaminosMini();
     /*PRE: Matriz de Floyd creada e inicializada
      *POST: muestra la matriz de Floyd (camino de menor coste)
     */
-    void Camino(int i, int j, int MatP[MAX][MAX]);
+    void Camino(int i, int j, ruta ruta);
 
     /*PRE:Matriz de adyacencia creada e inicializada
      *POST: muestra la matriz de adyacencia
@@ -81,34 +82,44 @@ public:
     /*PRE: Matriz de Floyd creada e inicializada
      *POST: muestra la matriz de Floyd (llamando al metodo "Camino")
     */
-    void mostrarMatrizFloyd();
+    void mostrarMatrizFloid();
 
     /*PRE: Matriz de prioridades creada e inicializada
      *POST: muestra la matriz de prioridades
     */
     void mostrarMatrizP();
 
-    /*PRE: 
+    /*PRE:
      *POST: crea la matriz de prioridades
     */
     void matrizPrioridad(string cad1, string cad2, int prioridad);
 
-    /*PRE: 
+    /*PRE:
      *POST: muestra los caminos minimos entre ciudades
     */
     void caminosMinimos();
 
     void setTamanoVectorRuta(int caminos);
 
-    /*PRE: 
+    /*PRE:
      *POST: muestra la cantidad minima de carreteras que deben arreglarse por prioridad
     */
     float kilometrosArreglados();
 
-    /*PRE: 
+    /*PRE:
      *POST: muestra los caminos minimos entre ciudades con carreteras arregladas
     */
     void caminosArreglados();
+    /*PRE:
+     *POST:
+    */
+    void algoritmoKruskal();
+
+    void obtenerCaminoMinimos();
+
+    float arcoMinimo (int &org, int &dst, int visitados[MAX]);
+
+    void copiarMatriz (float m[MAX][MAX]);
     //Añadir los métodos que consideres necesarios
 };
 
