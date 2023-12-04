@@ -18,116 +18,136 @@ struct ruta{
 	float kilometros;
 };
 class Grafo {
-    int N;
-    string Cjtovertices[MAX];
-    float MatAdyacencia[MAX][MAX]; //fila(i) = origen, columna(j) = destino
-    float MatFloyd [MAX][MAX];
-    int MatP [MAX][MAX];
-    int matPrioridad[MAX][MAX];
-    float matCaminosMin[MAX][MAX];
-    int preguntas;
-    vector<ruta>rutasGrafo;
-    int cantidadPrioridades;
-    //Añadir los atributos y métodos que consideres necesarios
+	int N;
+	string Cjtovertices[MAX];
+	float MatAdyacencia[MAX][MAX]; //fila(i) = origen, columna(j) = destino
+	float MatFloyd [MAX][MAX];
+	int MatP [MAX][MAX];
+	int matPrioridad[MAX][MAX];
+	float matCaminosMin[MAX][MAX];
+	int preguntas;
+	vector<ruta>rutasGrafo;
+	int cantidadPrioridades;
+	int matArreglados[MAX][MAX];
+	//Añadir los atributos y métodos que consideres necesarios
 
 public:
 
-    /*PRE:
-    *POST: inicializa las variables
-    */
-    //constructor de grafo
-    Grafo();
+	/*PRE:
+	 *POST: inicializa las variables
+	 */
+	//constructor de grafo
+	Grafo();
 
-    void setCantidadPrioridades(int maxPrio);
+	/*PRE: 0 < prio <= MAX
+	 *POST: inicializa el numero de prioridades del grafo
+	 */
+	void setCantidadPrioridades(int maxPrio);
 
-    int getCantidadPrioridades();
+	/*PRE: 0 < prio <= MAX
+	 *POST: devuelve el numero de prioridades del grafo
+	 */
+	int getCantidadPrioridades();
 
-    void setRutaGrafo(ruta rutaNueva, int i);
-    /*PRE: 0 < prio <= MAX
-     *POST: inicializa el numero de prioridades del grafo
-    */
-    void setPreguntas(int prio);
+	/*PRE:
+	 *POST: inicializa una nueva ruta del grafo
+	 */
+	void setRutaGrafo(ruta rutaNueva, int i);
 
-    /*PRE:
-     *POST: devuelve el numero de preguntas del grafo
-    */
-    int getPreguntas();
+	/*PRE:
+	 *POST: inicializa el numero de preguntas sobre los caminos minimos
+	 */
+	void setPreguntas(int prio);
 
-    /*PRE:
-     *POST: inserta la ciudad en el conjunto de vertices
-    */
-    void insertarVertice(string cad1);
+	/*PRE:
+	 *POST: devuelve el numero de preguntas sobre los caminos minimos
+	 */
+	int getPreguntas();
 
-    /*PRE:
-     *POST: inserta la distancia entre ciudades (coste) en la matriz de adyacencia, ademas, crea la matriz de adyacencia a partir del conjunto de vertices
-     */
-    void insertarArista(string cad1, string cad2, float coste);
+	/*PRE: que el conjunto de vertices no este lleno
+	 *POST: inserta la ciudad en el conjunto de vertices
+	 */
+	void insertarVertice(string cad1);
 
-    /*PRE:
-     *POST: busca la ciudad pasada por parametro en el conjunto de vertices
-    */
-    int buscarPosicion (string cad1);
+	/*PRE: que existan las ciudades en el grafo
+	 *POST: inserta la distancia entre ciudades (coste) en la matriz de adyacencia, ademas, crea la matriz de adyacencia a partir del conjunto de vertices
+	 */
+	void insertarArista(string cad1, string cad2, float coste);
 
-    /*PRE: Matriz de adyacencia creada e inicializada
-     *POST: crea la matriz de Floyd a partir de la matriz de adyacencia
-    */
-    void Floyd();
+	/*PRE: que exista el vertice
+	 *POST: busca la ciudad pasada por parametro en el conjunto de vertices
+	 */
+	int buscarPosicion (string cad1);
 
-    void floydCaminosMini();
-    /*PRE: Matriz de Floyd creada e inicializada
-     *POST: muestra la matriz de Floyd (camino de menor coste)
-    */
-    void Camino(int i, int j, ruta ruta);
+	/*PRE: Matriz de adyacencia creada e inicializada
+	 *POST: crea la matriz de Floyd a partir de la matriz de adyacencia
+	 */
+	void Floyd();
 
-    bool hayCamino(int i, int j);
+	/*PRE: Matriz de caminos minimos creado e inicializado
+	 *POST: crea la matriz de Floyd a partir de la matriz de caminos minimos
+	 */
+	void floydCaminosMini();
 
-    /*PRE:Matriz de adyacencia creada e inicializada
-     *POST: muestra la matriz de adyacencia
-    */
-    void MostrarMatrizAdy();
+	/*PRE: Matriz de Floyd creada e inicializada
+	 *POST: muestra la matriz de Floyd (camino de menor coste)
+	 */
+	void Camino(int i, int j, ruta ruta);
 
-    /*PRE: Matriz de Floyd creada e inicializada
-     *POST: muestra la matriz de Floyd (llamando al metodo "Camino")
-    */
-    void mostrarMatrizFloid();
+	/*PRE: Matriz de caminos minimos creada e inicializada
+	 *POST: comprueba si hay camino entre dos vertices a partir de la matriz de caminos minimos
+	 */
+	bool hayCamino(int i, int j);
 
-    /*PRE: Matriz de prioridades creada e inicializada
-     *POST: muestra la matriz de prioridades
-    */
-    void mostrarMatrizP();
+	/*PRE:Matriz de adyacencia creada e inicializada
+	 *POST: muestra la matriz de adyacencia
+	 */
+	void MostrarMatrizAdy();
 
-    /*PRE:
-     *POST: crea la matriz de prioridades
-    */
-    void matrizPrioridad(string cad1, string cad2, int prioridad);
+	/*PRE: Matriz P creada e inicializada
+	 *POST: muestra la matriz P
+	 */
+	void mostrarMatrizP();
 
-    /*PRE:
-     *POST: muestra los caminos minimos entre ciudades
-    */
-    void caminosMinimos();
+	/*PRE: matriz de prioridad creada
+	 *POST: crea la matriz de prioridades
+	 */
+	void matrizPrioridad(string cad1, string cad2, int prioridad);
 
-    void setTamanoVectorRuta(int caminos);
+	/*PRE: matriz de Floyd(con caminos minimos) creada e inicializada
+	 *POST: muestra los caminos minimos entre ciudades
+	 */
+	void caminosMinimos();
 
-    /*PRE:
-     *POST: muestra la cantidad minima de carreteras que deben arreglarse por prioridad
-    */
-    float kilometrosArreglados();
+	/*PRE:matriz de prioridad y de caminos minimos creadas e inicializadas
+	 *POST: muestra la cantidad minima de carreteras que deben arreglarse por prioridad
+	 */
+	float kilometrosArreglados();
 
-    /*PRE:
-     *POST: muestra los caminos minimos entre ciudades con carreteras arregladas
-    */
-    void caminosArreglados();
-    /*PRE:
-     *POST:
-    */
-    void algoritmoKruskal();
+	/*PRE:
+	 *POST: guarda en una matriz los caminos minimos entre ciudades con carreteras arregladas
+	 */
+	void caminosArreglados();
+	/*PRE:
+	 *POST: guarda en una matriz los caminos monimos entre ciudades
+	 */
+	void algoritmoKruskal();
 
-    void obtenerCaminoMinimos();
+	/*PRE: matriz de adyacencia creada e inicializada
+	 *POST: obtiene el arco menor de la matriz de adyacencia
+	 */
+	float arcoMinimo (int &org, int &dst, int visitados[MAX]);
 
-    float arcoMinimo (int &org, int &dst, int visitados[MAX]);
+	/*PRE: matriz de prioridad creada e inicializada
+	 *POST: obtiene el arco menor de la matriz de prioridad
+	 */
+	float arcoMinArreglado(int &org, int &dst, int visitados[MAX]);
 
-    void copiarMatriz (float m[MAX][MAX]);
-    //Añadir los métodos que consideres necesarios
+	/*PRE: matriz de caminos minimos creada
+	 *POST: copia en la matriz de caminos minimos, la matriz pasada por parametro
+	 */
+	void copiarMatriz (float m[MAX][MAX]);
+	//Añadir los métodos que consideres necesarios
 };
 
 #endif /* ENTREGAGRAFO_H_*/
