@@ -16,6 +16,15 @@ struct ruta{
 	//camino almacenara la ruta a seguir para obtener el camino
 	vector<string>camino[MAX];
 	float kilometros;
+
+	//constructor del struct
+	ruta(string origen, string destino) :
+			origen(origen),
+			destino(destino),
+			numCiudades(),
+			camino(),
+			kilometros()
+	{}
 };
 class Grafo {
 	int N;
@@ -50,9 +59,9 @@ public:
 	int getCantidadPrioridades();
 
 	/*PRE:
-	 *POST: inicializa una nueva ruta del grafo
+	 *POST:
 	 */
-	void setRutaGrafo(ruta rutaNueva, int i);
+	void setRutaGrafo(string origen, string destino, int i);
 
 	/*PRE:
 	 *POST: inicializa el numero de preguntas sobre los caminos minimos
