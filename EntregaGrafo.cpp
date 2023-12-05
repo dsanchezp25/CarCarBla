@@ -1,10 +1,12 @@
 
 #include "entregaGrafo.h"
+#include <cfloat>
 
 Grafo::Grafo(){
 	N = 0;
 	preguntas = 0;
 	cantidadPrioridades = 0;
+
 	for (int i=0; i<MAX; i++){
 		for (int j=0; j<MAX; j++){
 			MatAdyacencia[i][j]=0;
@@ -18,13 +20,20 @@ Grafo::Grafo(){
 }
 
 void Grafo::setRutaGrafo(string origen, string destino, int i) {
-		ruta nuevaRuta(origen, destino);
-		rutasGrafo.push_back(nuevaRuta);
+	ruta nuevaRuta(origen, destino);
+	rutasGrafo.push_back(nuevaRuta);
 }
 
 void Grafo::setPreguntas(int prio) {
 	this->preguntas = prio;
-	this->rutasGrafo[prio];
+}
+
+void Grafo::setCantidadPrioridades(int maxPrio) {
+	this->cantidadPrioridades = maxPrio;
+}
+
+int Grafo::getCantidadPrioridades() {
+	return cantidadPrioridades;
 }
 
 int Grafo::getPreguntas() {
@@ -55,8 +64,7 @@ void Grafo::insertarArista(string cad1, string cad2, float coste){
 	if(pos1 != -1 && pos2 != -1){
 		MatAdyacencia[pos1][pos2] = coste;
 		MatAdyacencia[pos2][pos1] = coste;
-	}
-	else
+	}else
 		cout << "Una o las dos ciudades no se encuentran en el grafo" << endl;
 }
 
@@ -69,18 +77,18 @@ void Grafo::MostrarMatrizAdy(){
 }
 
 void Grafo::Floyd(){
-	//se inicializa MatFloyd con los valores de MatAdyacencia
+	// se inicializa MatFloyd con los valores de MatAdyacencia
 	for(int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
 			MatFloyd[i][j] = MatAdyacencia[i][j];
 
-	//Despues se aplica el algoritmo de Floyd
+	// Despues se aplica el algoritmo de Floyd
 	for(int k = 1; k <= N; k++){
 		for(int i = 1; i <= N; i++){
 			for(int j = 1; j <= N; j++){
 				if(MatFloyd[i][k] + MatFloyd[k][j] < MatFloyd[i][j]){
 					MatFloyd[i][j] = MatFloyd[i][k] + MatFloyd[k][j];
-					MatP[i][j] = k;//k = vertice intermedio
+					MatP[i][j] = k; // k = vertice intermedio
 				}
 			}
 		}
@@ -88,18 +96,18 @@ void Grafo::Floyd(){
 }
 
 void Grafo::floydCaminosMini(){
-	//se inicializa MatFloyd con los valores de MatAdyacencia
+	// se inicializa MatFloyd con los valores de MatAdyacencia
 	for(int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
 			MatFloyd[i][j] = matCaminosMin[i][j];
 
-	//Despues se aplica el algoritmo de Floyd
+	// Despues se aplica el algoritmo de Floyd
 	for(int k = 1; k <= N; k++){
 		for(int i = 1; i <= N; i++){
 			for(int j = 1; j <= N; j++){
 				if(MatFloyd[i][k] + MatFloyd[k][j] < MatFloyd[i][j]){
 					MatFloyd[i][j] = MatFloyd[i][k] + MatFloyd[k][j];
-					MatP[i][j] = k;//k = vertice intermedio
+					MatP[i][j] = k;// k = vertice intermedio
 				}
 			}
 		}
@@ -115,7 +123,7 @@ void Grafo::mostrarMatrizP() {
 }
 
 void Grafo::Camino(int i, int j, ruta ruta){
-	//Se muestra la matriz de Floyd
+	// Muestra la matriz de Floyd
 	int k;
 	k = MatP[i][j];
 	if(k != -1){
@@ -127,15 +135,12 @@ void Grafo::Camino(int i, int j, ruta ruta){
 }
 
 bool Grafo::hayCamino(int i, int j) {
-	bool enc = false;
 	int k = matCaminosMin[i][j];
 
-	if(k != -1){
-		enc = hayCamino(i, k);
-		enc = hayCamino(k, j);
-	}
+	if(k != -1)
+		return hayCamino(i, k) && hayCamino(k, j); // si hay camino retorna true
 
-	return enc;
+	return false; //si no hay camino retorna falso
 }
 
 void Grafo::matrizPrioridad(string cad1, string cad2, int prioridad){
@@ -226,7 +231,7 @@ void Grafo::algoritmoKruskal() {
 
 
 float Grafo::arcoMinimo (int &org, int &dst, int visitados[MAX]) {
-	float min = 9999;
+	float min = FLT_MAX; //utiliza limite superior float
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
 			if (min > MatAdyacencia[i][j] && MatAdyacencia[i][j] != 0 && visitados[i] != visitados[j]) {
@@ -285,7 +290,7 @@ void Grafo::caminosArreglados() {
 }
 
 float Grafo::arcoMinArreglado(int &org, int &dst, int visitados[MAX]) {
-	float min = 9999;
+	float min = FLT_MAX; //utiliza limite superior float
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
 			if (min > matPrioridad[i][j] && matPrioridad[i][j] != 0 && visitados[i] != visitados[j]) {
@@ -296,10 +301,4 @@ float Grafo::arcoMinArreglado(int &org, int &dst, int visitados[MAX]) {
 	return min;
 }
 
-void Grafo::setCantidadPrioridades(int maxPrio) {
-	cantidadPrioridades = maxPrio;
-}
 
-int Grafo::getCantidadPrioridades() {
-	return cantidadPrioridades;
-}
