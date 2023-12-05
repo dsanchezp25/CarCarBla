@@ -30,7 +30,7 @@ class Grafo {
 	int N; // numero de vertices
 	string Cjtovertices[MAX]; // vector que contiene el conjunto de vertices
 	float MatAdyacencia[MAX][MAX]; //fila(i) = origen, columna(j) = destino
-	float MatFloyd [MAX][MAX]; 
+	float MatFloyd [MAX][MAX];
 	int MatP [MAX][MAX];
 	int matPrioridad[MAX][MAX];
 	float matCaminosMin[MAX][MAX];
@@ -38,7 +38,7 @@ class Grafo {
 	vector<ruta>rutasGrafo; // vector de struct ruta
 	int cantidadPrioridades; // cantidad de prioridades
 	int matArreglados[MAX][MAX]; // matriz de caminos arreglados
-	
+
 
 public:
 
