@@ -33,7 +33,6 @@ void ejecucionGrafo(Grafo& g){
 int main(){
 
 	Grafo G = *new Grafo(); //creamos el grafo G
-    Grafo Prioridad = *new Grafo(); //creamos el grafo de prioridades
 
     // Lectura del número de ciudades
     int n;
