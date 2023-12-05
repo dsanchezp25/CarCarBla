@@ -10,12 +10,12 @@ using namespace std;
 
 static const int MAX = 20;
 struct ruta{
-	string origen;
-	string destino;
-	int numCiudades;
-	//camino almacenara la ruta a seguir para obtener el camino
-	vector<string>camino[MAX];
-	float kilometros;
+	string origen; // origen de la ruta
+	string destino; //origen del destino
+	int numCiudades; // numero de ciudades que tiene la ruta
+ 	//camino almacenara la ruta a seguir para obtener el camino
+	vector<string>camino[MAX]; // vector que contiene las ciudades de la ruta
+	float kilometros; // distancia/coste total de la ruta
 
 	//constructor del struct
 	ruta(string origen, string destino) :
@@ -27,25 +27,25 @@ struct ruta{
 	{}
 };
 class Grafo {
-	int N;
-	string Cjtovertices[MAX];
+	int N; // numero de vertices
+	string Cjtovertices[MAX]; // vector que contiene el conjunto de vertices
 	float MatAdyacencia[MAX][MAX]; //fila(i) = origen, columna(j) = destino
-	float MatFloyd [MAX][MAX];
+	float MatFloyd [MAX][MAX]; 
 	int MatP [MAX][MAX];
 	int matPrioridad[MAX][MAX];
 	float matCaminosMin[MAX][MAX];
-	int preguntas;
-	vector<ruta>rutasGrafo;
-	int cantidadPrioridades;
-	int matArreglados[MAX][MAX];
-	//Añadir los atributos y métodos que consideres necesarios
+	int preguntas; // cantidad de preguntas a leer
+	vector<ruta>rutasGrafo; // vector de struct ruta
+	int cantidadPrioridades; // cantidad de prioridades
+	int matArreglados[MAX][MAX]; // matriz de caminos arreglados
+	
 
 public:
 
+	//constructor de grafo
 	/*PRE:
 	 *POST: inicializa las variables
 	 */
-	//constructor de grafo
 	Grafo();
 
 	/*PRE: 0 < prio <= MAX
@@ -58,12 +58,12 @@ public:
 	 */
 	int getCantidadPrioridades();
 
-	/*PRE:
-	 *POST:
+	/*PRE: string origen, destino y int i deben ser leidos correctamente
+	 *POST: modifican los valores origen y destino de la ruta i del vector rutasGrafo del grafo
 	 */
 	void setRutaGrafo(string origen, string destino, int i);
 
-	/*PRE:
+	/*PRE: int prio debe ser leido correctamente
 	 *POST: inicializa el numero de preguntas sobre los caminos minimos
 	 */
 	void setPreguntas(int prio);
@@ -137,6 +137,7 @@ public:
 	 *POST: guarda en una matriz los caminos minimos entre ciudades con carreteras arregladas
 	 */
 	void caminosArreglados();
+
 	/*PRE:
 	 *POST: guarda en una matriz los caminos monimos entre ciudades
 	 */
@@ -153,10 +154,10 @@ public:
 	float arcoMinArreglado(int &org, int &dst, int visitados[MAX]);
 
 	/*PRE: matriz de caminos minimos creada
-	 *POST: copia en la matriz de caminos minimos, la matriz pasada por parametro
+	 *POST: copia en la matriz de caminos minimos la matriz pasada por parametro
 	 */
 	void copiarMatriz (float m[MAX][MAX]);
-	//Añadir los métodos que consideres necesarios
+
 };
 
 #endif /* ENTREGAGRAFO_H_*/
