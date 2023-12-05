@@ -12,13 +12,14 @@ Grafo::Grafo(){
 			MatP[i][j]=-1;
 			matPrioridad[i][j] = 0;
 		}
+
 	}
 
 }
 
 void Grafo::setRutaGrafo(string origen, string destino, int i) {
-	this->rutasGrafo[i].origen = origen;
-	this->rutasGrafo[i].destino = destino;
+		ruta nuevaRuta(origen, destino);
+		rutasGrafo.push_back(nuevaRuta);
 }
 
 void Grafo::setPreguntas(int prio) {
